@@ -1,0 +1,2 @@
+# qmail
+qmail installation script
