@@ -338,3 +338,13 @@ chown -R apache.apche /var/local/squirrelmail/attach/ /var/local/squirrelmail/da
 ################avoid error
 echo '127.:allow,RELAYCLIENT=""' >>/etc/tcp.smtp
 qmailctl cdb
+
+##Add ssl
+yum install crypto-utils
+yum -y install mod_ssl 
+#echo +77 /i /etc/httpd/conf.d/ssl.conf 
+# line 77: uncomment
+#DocumentRoot "/var/www/html"
+# line 78: uncomment and specify the server name
+#ServerName www.srv.world:443
+
