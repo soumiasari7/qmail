@@ -24,14 +24,9 @@ yum -y install php
 cd /usr/local/src
 wget http://www.qmail.org/netqmail-1.06.tar.gz
 wget http://cr.yp.to/ucspi-tcp/ucspi-tcp-0.88.tar.gz
-wget http://cr.yp.to/tools/daemontools-0.76.tar.gz
-wget http://ftp.nsysu.edu.tw/FreeBSD/ports/local-distfiles/bdrewery/qmail/qmail-smtpd-auth-0.31.tar.gz
+wget http://cr.yp.to/daemontools/daemontools-0.76.tar.gz
+wget http://tomclegg.net/qmail/qmail-smtpd-auth-0.31.tar.gz
 wget http://www.dovecot.org/releases/1.2/dovecot-1.2.6.tar.gz
-wget http://archive.apache.org/dist/spamassassin/Mail-SpamAssassin-3.3.2.tar.gz
-wget http://mirror.trouble-free.net/sources/clamav-0.97.6.tar.gz
-wget http://shupp.org/software/toaster-scripts-0.9.1.tar.gz
-wget http://www.pldaniels.com/ripmime/ripmime-1.4.0.10.tar.gz
-wget http://garr.dl.sourceforge.net/project/simscan/simscan/simscan-1.4.0/simscan-1.4.0.tar.gz
 mkdir /package
 mv /usr/local/src/daemontools-0.76.tar.gz /package
 
