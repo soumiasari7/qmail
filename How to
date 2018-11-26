@@ -1,0 +1,40 @@
+Pre Installation Dependencies
+
+Need working Internet Connection
+Need an Updated CentOS 6
+Need a ROOT account access for script run
+
+For updating the distro with latest packages you need to run given commands in Terminal.
+
+# yum upgrade -y
+
+For switching normal accounts to root accounts you need to run commands on your Terminal
+# su -
+Enter your password
+
+Qmail Server Installation Script
+Method-1 (Download and run the Qmail Server Installation Scripts)
+
+Download the Qmail Server Installation Scripts
+# wget https://github.com/soumia7/qmail/blob/master/qmail.sh
+
+Run the Qmail Server Installation Scripts
+# bash qmail.sh
+OR
+# sh qmail.sh
+
+Method-2 (Clone and run the Qmail Server Installation Scripts)
+Install the GIT
+# yum install git -y
+
+Clone and run the Qmail Server Installation Scripts
+# git clone https://github.com/soumia7/qmail && bash qmail/qmail.sh
+OR
+# git clone https://github.com/soumia7/qmait && sh qmail/qmail.sh
+
+
+Note : before starting the script
+->change your hostname server in FQDN format 
+
+
+
