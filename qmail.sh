@@ -115,7 +115,7 @@ cd ..
 ./package/install
 
 #Qmail Startup script
-cd /var/usr/src
+cd /var/qmail/bin
 wget http://lifewithqmail.org/qmailctl-script-dt70
 mv qmailctl-script-dt70 qmailctl
 chmod 755 /var/qmail/bin/qmailctl
@@ -186,7 +186,7 @@ chmod 755 /var/qmail/supervise/qmail-smtpd/log/run
 ln -s /var/qmail/supervise/qmail-send /service/qmail-send
 ln -s /var/qmail/supervise/qmail-smtpd /service/qmail-smtpd
 svscanboot &
-qmailctl start
+start
 qmailctl stat
 ##############################################################################################################
 
