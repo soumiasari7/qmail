@@ -75,13 +75,13 @@ chmod 644 ~alias/.qmail* ;
 #Create “/var/qmail/rc” with following contents.
 
 cat <<EOF > /var/qmail/rc
-       #!/bin/sh
-       set -x
-       # Using stdout for logging
-       # Using control/defaultdelivery from qmail-local to deliver messages by default
-       exec env -PATH="/var/qmail/bin:$PATH" \
-       qmail-start "`cat /var/qmail/control/defaultdelivery`"  
-       EOF
+#!/bin/sh
+set -x
+# Using stdout for logging
+# Using control/defaultdelivery from qmail-local to deliver messages by default
+exec env -PATH="/var/qmail/bin:$PATH" \
+qmail-start "`cat /var/qmail/control/defaultdelivery`"  
+EOF
 
 chmod 755 /var/qmail/rc
 
