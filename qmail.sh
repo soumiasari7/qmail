@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #############################################################################
-Created by Soumia Sari <soumia.sari7@gmail.com> 2018-11-25
+#Created by Soumia Sari <soumia.sari7@gmail.com> 2018-11-25
 #############################################################################
 
 yum install gcc gcc-c++ make patch pam-devel openssl* wget vim-common  vim-enhanced -y
