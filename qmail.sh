@@ -194,6 +194,7 @@ qmailctl stat
 
 #Install Vpopmail
 mkdir -p /usr/local/src/build
+cd /usr/local/src/build
 wget https://sourceforge.net/projects/vpopmail/files/latest/download/vpopmail-5.4.33.tar.gz
 tar xvzf vpopmail-5.4.33.tar.gz
 cd vpopmail-5.4.33
