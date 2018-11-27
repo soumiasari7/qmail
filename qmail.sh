@@ -194,7 +194,7 @@ qmailctl stat
 
 #Install Vpopmail
 mkdir -p /usr/local/src/build
-wget http://garr.dl.sourceforge.net/project/vpopmail/vpopmail-stable/5.4.33/vpopmail-5.4.33.tar.gz
+wget https://fr.osdn.net/frs/g_redir.php?m=kent&f=vpopmail%2Fvpopmail-stable%2F5.4.33%2Fvpopmail-5.4.33.tar.gz
 tar xvzf vpopmail-5.4.33.tar.gz
 cd vpopmail-5.4.33
 groupadd vchkpw
@@ -219,8 +219,8 @@ chmod 755 mkcert.sh
 
 #Create /etc/pam.d/dovecot
 cat <<EOF > /etc/pam.d/dovecot
-auth required pam_unix.so nullok
-account required pam_unix.so
+#auth required pam_unix.so nullok
+#account required pam_unix.so
 EOF
 
 cp -pv /usr/local/etc/dovecot-example.conf /usr/local/etc/dovecot.conf
