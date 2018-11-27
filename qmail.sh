@@ -122,8 +122,8 @@ chmod 755 /var/qmail/bin/qmailctl
 ln -s /var/qmail/bin/qmailctl /usr/bin
 
 #Setup qmail-send & qmail-smtpd
-mkdir –p /var/qmail/supervise/qmail-send/log
-mkdir –p /var/qmail/supervise/qmail-smtpd
+mkdir -p /var/qmail/supervise/qmail-send/log
+mkdir -p /var/qmail/supervise/qmail-smtpd/log
 
 #Create supervise script for qmail-send with name “/var/qmail/supervise/qmail-send/run”.
 #The file should have following contents.
@@ -216,8 +216,13 @@ mkdir -p /etc/ssl/private/
 cd /usr/local/src/dovecot-1.2.6/doc/
 chmod 755 mkcert.sh
 ./mkcert.sh
+
+#Create /etc/pam.d/dovecot
+cat <<EOF > /etc/pam.d/dovecot
 auth required pam_unix.so nullok
 account required pam_unix.so
+EOF
+
 cp -pv /usr/local/etc/dovecot-example.conf /usr/local/etc/dovecot.conf
 
 ##############################Edit dovecot.conf#########################
@@ -316,7 +321,7 @@ make install-strip
 
 ##Install Squirrelmail
 cd /usr/local/src
-wget http://garr.dl.sourceforge.net/project/squirrelmail/stable/1.4.22/squirrelmail-webmail-1.4.22.tar.gz
+wget https://sourceforge.net/projects/squirrelmail/files/latest/download/squirrelmail-webmail-1.4.22.tar.gz
 tar xfvz squirrelmail-webmail-1.4.22.tar.gz
 mv squirrelmail-webmail-1.4.22 /var/www/html
 cd /var/www/html
@@ -327,7 +332,7 @@ cd squirrelmail
 mkdir -p /var/local/squirrelmail/data/
 mkdir -p /var/local/squirrelmail/attach/
 chmod -R 755 /var/www/html/squirrelmail
-chown -R apache.apche /var/local/squirrelmail/attach/ /var/local/squirrelmail/data/
+chown -R apache.apache /var/local/squirrelmail/attach/ /var/local/squirrelmail/data/
 
 
 ################avoid error
