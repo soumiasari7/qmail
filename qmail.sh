@@ -242,6 +242,7 @@ cp -pv /usr/local/etc/dovecot-example.conf /usr/local/etc/dovecot.conf
 
 ##############################Edit dovecot.conf#########################
 ##to complete!
+#source /usr/local/src/script/dovecot_conf.sh
 ########################################################################"
 
 #Create /etc/init.d/dovecot with following contents.
