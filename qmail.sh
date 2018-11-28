@@ -188,6 +188,21 @@ ln -s /var/qmail/supervise/qmail-smtpd /service/qmail-smtpd
 svscanboot &
 start
 qmailctl stat
+
+##########Setting up an SMTP service
+mkdir -m 1755 /var/qmail/supervise/qmail-smtp
+cd /var/qmail/supervise/qmail-smtp
+wget http://qmail.jms1.net/scripts/service-qmail-smtpd-run
+mv service-qmail-smtpd-run run
+chmod 700 run
+chown vpopmail:vchkpw ~vpopmail/bin/vchkpw
+chmod 6711 ~vpopmail/bin/vchkpw
+mkdir -m 755 log
+cd log
+wget http://qmail.jms1.net/scripts/service-any-log-run
+mv service-any-log-run run
+chmod 700 run
+ln -s /var/qmail/supervise/qmail-smtp /service/
 ##############################################################################################################
 
 ##############################################################################################################
