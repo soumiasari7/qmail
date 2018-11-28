@@ -390,6 +390,8 @@ chown -R apache.apache /var/local/squirrelmail/attach/ /var/local/squirrelmail/d
 echo '127.:allow,RELAYCLIENT=""' >>/etc/tcp.smtp
 qmailctl cdb
 
+setsebool -P httpd_can_network_connect=1 
+
 ##Add ssl
 yum install crypto-utils
 yum -y install mod_ssl 
