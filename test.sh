@@ -54,4 +54,4 @@ echo $"Usage: $0 {condrestart|start|stop|restart|reload|status}"
 exit 1
 esac
 exit $RETVAL
-EOM
+EOF
