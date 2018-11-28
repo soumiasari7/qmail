@@ -1,6 +1,6 @@
 #!/bin/sh
 
-/bin/cat <<EOM > /etc/init.d/dovecot
+/bin/cat <<EOM > /etc/init.d/dovecot3
 #!/bin/bash
 # /etc/rc.d/init.d/dovecot
 # Starts the dovecot daemon
