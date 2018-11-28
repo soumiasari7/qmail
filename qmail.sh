@@ -74,7 +74,7 @@ chmod 644 ~alias/.qmail* ;
 
 #Create “/var/qmail/rc” with following contents.
 
-cat <<EOF > /var/qmail/rc
+cat << 'EOF' > /var/qmail/rc
 #!/bin/sh
 set -x
 # Using stdout for logging
@@ -127,21 +127,21 @@ mkdir -p /var/qmail/supervise/qmail-smtpd/log
 
 #Create supervise script for qmail-send with name “/var/qmail/supervise/qmail-send/run”.
 #The file should have following contents.
-cat <<EOF > /var/qmail/supervise/qmail-send/run
+cat << 'EOF' > /var/qmail/supervise/qmail-send/run
 #!/bin/sh
 exec /var/qmail/rc
 EOF
 
 #Create qmail-send log daemon supervise script with name “/var/qmail/supervise/qmail-send/log/run”.
 #The script should have following contents
-cat <<EOF > /var/qmail/supervise/qmail-send/log/run
+cat << 'EOF' > /var/qmail/supervise/qmail-send/log/run
 #!/bin/sh
 exec /usr/local/bin/setuidgid qmaill /usr/local/bin/multilog t /var/log/qmail
 EOF
       
 #Create qmail-smtpd daemon supervise script with name “/var/qmail/supervise/qmail-smtpd/run”.
 #The script should have following contents
-cat <<EOF > /var/qmail/supervise/qmail-smtpd/run
+cat << 'EOF' > /var/qmail/supervise/qmail-smtpd/run
 #!/bin/sh
 set -x
 QMAILDUID=`id -u qmaild`
@@ -150,7 +150,6 @@ MAXSMTPD=`cat /var/qmail/control/concurrencyincoming`
 LOCAL=`head -1 /var/qmail/control/me`
 if [ -z "$QMAILDUID"-o -z "$NOFILESGID" -o -z "$MAXSMTPD" -o -z "$LOCAL" ]; then
 echo QMAILDUID, NOFILESGID, MAXSMTPD, or LOCAL is unset in
-7
 echo /var/qmail/supervise/qmail-smtpd/run
 exit 1
 fi
@@ -170,7 +169,7 @@ chmod 644 /var/qmail/control/concurrencyincoming
 
 #Create qmail-smtpd log daemon supervise script with name“/var/qmail/supervise/qmail-smtpd/log/run”.
 #The script should have following contents
-cat <<EOF > /var/qmail/supervise/qmail-smtpd/log/run
+cat << 'EOF' > /var/qmail/supervise/qmail-smtpd/log/run
 #!/bin/sh
 exec /usr/local/bin/setuidgid qmaill /usr/local/bin/multilog t /var/log/qmail/smtpd
 EOF
@@ -246,7 +245,7 @@ cp -pv /usr/local/etc/dovecot-example.conf /usr/local/etc/dovecot.conf
 ########################################################################"
 
 #Create /etc/init.d/dovecot with following contents.
-cat <<EOF > /etc/init.d/dovecot
+cat << 'EOF' > /etc/init.d/dovecot
 #!/bin/bash
 # /etc/rc.d/init.d/dovecot
 # Starts the dovecot daemon
@@ -315,7 +314,7 @@ cp -pv run run.bak
 #Modify run file as given below.
 
 #vim run
-cat <<EOF > /service/qmail-smtpd/run
+cat << 'EOF' > /service/qmail-smtpd/run
 #!/bin/sh
 set -x
 QMAILDUID=`id -u qmaild`
@@ -400,4 +399,3 @@ yum -y install mod_ssl
 #DocumentRoot "/var/www/html"
 # line 78: uncomment and specify the server name
 #ServerName www.srv.world:443
-
