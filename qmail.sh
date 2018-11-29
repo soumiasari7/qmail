@@ -385,12 +385,12 @@ mkdir -p /var/local/squirrelmail/attach/
 chmod -R 755 /var/www/html/squirrelmail
 chown -R apache.apache /var/local/squirrelmail/attach/ /var/local/squirrelmail/data/
 
+setsebool -P httpd_can_network_connect=1 
+setsebool httpd_can_sendmail on
 
 ################avoid error
 echo '127.:allow,RELAYCLIENT=""' >>/etc/tcp.smtp
 qmailctl cdb
-
-setsebool -P httpd_can_network_connect=1 
 
 ##Add ssl
 yum install crypto-utils
