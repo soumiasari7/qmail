@@ -22,9 +22,9 @@ yum -y install php
 
 #Mail server
 cd /usr/local/src
-wget http://www.qmail.org/netqmail-1.06.tar.gz
-wget http://cr.yp.to/ucspi-tcp/ucspi-tcp-0.88.tar.gz
-wget http://cr.yp.to/daemontools/daemontools-0.76.tar.gz
+wget http://qmail.ixip.net/download/netqmail-1.06.tar.gz
+wget http://qmail.ixip.net/download/ucspi-tcp-0.88.tar.gz
+wget http://qmail.ixip.net/download/daemontools-0.76.tar.gz
 wget http://tomclegg.net/qmail/qmail-smtpd-auth-0.31.tar.gz
 wget http://www.dovecot.org/releases/1.2/dovecot-1.2.6.tar.gz
 mkdir /package
@@ -50,7 +50,7 @@ cd /usr/local/src
 tar -xzvf qmail-smtpd-auth-0.31.tar.gz
 cd qmail-smtpd-auth-0.31/
 cp README.auth base64.c base64.h ../netqmail-1.06
-patch-d ../netqmail-1.06 < auth.patch
+patch -d ../netqmail-1.06 < auth.patch
 
 #Compile & install qmail
 cd /usr/local/src/netqmail-1.06
@@ -96,6 +96,9 @@ mv /usr/sbin/sendmail /usr/sbin/sendmail.bak ;
 ln -s /var/qmail/bin/sendmail /usr/lib/sendmail ;
 ln -s /var/qmail/bin/sendmail /usr/sbin/sendmail ;
 
+service postfix stop
+service postfix disable
+
 #Install ucspi-tcp
 cd /usr/local/src/
 tar -xzvf ucspi-tcp-0.88.tar.gz
@@ -127,9 +130,11 @@ mkdir -p /var/qmail/supervise/qmail-smtpd/log
 
 #Create supervise script for qmail-send with name “/var/qmail/supervise/qmail-send/run”.
 #The file should have following contents.
+#https://qmail.jms1.net/scripts/service-qmail-send-run
 cat << 'EOF' > /var/qmail/supervise/qmail-send/run
-#!/bin/sh
-exec /var/qmail/rc
+VQ="/var/qmail"
+exec env - PATH="$VQ/bin:/usr/local/bin:/usr/bin:/bin" \
+  qmail-start ./Maildir/
 EOF
 
 #Create qmail-send log daemon supervise script with name “/var/qmail/supervise/qmail-send/log/run”.
@@ -188,22 +193,6 @@ svscanboot &
 start
 qmailctl stat
 
-##########Setting up an SMTP service
-mkdir -m 1755 /var/qmail/supervise/qmail-smtp
-cd /var/qmail/supervise/qmail-smtp
-wget http://qmail.jms1.net/scripts/service-qmail-smtpd-run
-mv service-qmail-smtpd-run run
-chmod 700 run
-chown vpopmail:vchkpw ~vpopmail/bin/vchkpw
-chmod 6711 ~vpopmail/bin/vchkpw
-mkdir -m 755 log
-cd log
-wget http://qmail.jms1.net/scripts/service-any-log-run
-mv service-any-log-run run
-chmod 700 run
-ln -s /var/qmail/supervise/qmail-smtp /service/
-##############################################################################################################
-
 ##############################################################################################################
 
 #Install Vpopmail
@@ -237,6 +226,23 @@ cat <<EOF > /etc/pam.d/dovecot
 #auth required pam_unix.so nullok
 #account required pam_unix.so
 EOF
+
+####################################################################
+##########Setting up an SMTP service
+mkdir -m 1755 /var/qmail/supervise/qmail-smtp
+cd /var/qmail/supervise/qmail-smtp
+wget http://qmail.jms1.net/scripts/service-qmail-smtpd-run
+mv service-qmail-smtpd-run run
+chmod 700 run
+chown vpopmail:vchkpw ~vpopmail/bin/vchkpw
+chmod 6711 ~vpopmail/bin/vchkpw
+mkdir -m 755 log
+cd log
+wget http://qmail.jms1.net/scripts/service-any-log-run
+mv service-any-log-run run
+chmod 700 run
+ln -s /var/qmail/supervise/qmail-smtp /service/
+##############################################################################################################
 
 cp -pv /usr/local/etc/dovecot-example.conf /usr/local/etc/dovecot.conf
 
@@ -363,10 +369,10 @@ make
 
 ##QmailAdmin
 cd /usr/local/src
-wget http://garr.dl.sourceforge.net/project/qmailadmin/qmailadmin-devel/qmailadmin-1.2.16.tar.gz
+wget https://sourceforge.net/projects/qmailadmin/files/qmailadmin-devel/qmailadmin-1.2.16.tar.gz
 tar zxvf qmailadmin-1.2.16.tar.gz
 cd qmailadmin-1.2.16
-./configure
+./configure --enable-ezmlmdir --enable-autoresponder-path
 make
 make install-strip
 
